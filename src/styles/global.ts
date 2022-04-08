@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         --background: #f0f2f5;
         --red: #E62E4D;
+        --green: #33CC95;
         --blue: #5429CC;
         --blue-light: #6933ff;
         --text-title: #363F5F;
@@ -40,8 +41,6 @@ export const GlobalStyle = createGlobalStyle`
     h1, h2, h3, h4, h5, h6, strong {
         font-weight: 600;
     }
-
-
 
     button {
         cursor: pointer;
