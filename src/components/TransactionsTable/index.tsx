@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { TransactionsContext } from "../../hooks/useTransactions";
 import { Container } from "./styles";
 
 export function TransactionsTable() {
+    const { transactions } = useContext(TransactionsContext)
+
     return (
         <Container>
             <table>
@@ -14,18 +18,26 @@ export function TransactionsTable() {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>Compra da cafeteira italiana</td>
-                        <td className="withdraw">-R$69,90</td>
-                        <td>Utilidades</td>
-                        <td>08/04/2022</td>
-                    </tr>
-                    <tr>
-                        <td>Salário CIandT</td>
-                        <td className="deposity">R$1090,90</td>
-                        <td>Trabalho</td>
-                        <td>05/04/2022</td>
-                    </tr>
+                    {transactions.map(transaction => {
+                        return (
+                            <tr key={transaction.id}>
+                                <td>{transaction.title}</td>
+                                <td className={transaction.type}>
+                                    {new Intl.NumberFormat('pt-BR', {
+                                        style: 'currency',
+                                        currency: 'BRL',
+                                    }).format(transaction.amount)}
+                                </td>
+                                <td>{transaction.category}</td>
+                                <td>
+                                    {
+                                        new Intl.DateTimeFormat('pt-BR')
+                                            .format(new Date(transaction.createdAt))
+                                    }
+                                </td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
         </Container>
